@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useAddTransactions } from "../../hooks/useAddTransactions";
 import useGetTransactions from "../../hooks/useGetTransactions";
+import useDeleteTransactions from "../../hooks/useDeleteTransactions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const DynamicGrid = ({ data }) => {
+const DynamicGrid = ({ data, onDelete }) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border border-gray-200">
@@ -21,8 +22,8 @@ const DynamicGrid = ({ data }) => {
           {data.map((item, index) => (
             <tr
               key={index}
-              data-id={index}
               className="hover:bg-gray-100 text-center"
+              data-id={item.id}
             >
               <td className="border-b">{item.description}</td>
               <td className="border-b">{item.amount}€</td>
@@ -32,7 +33,13 @@ const DynamicGrid = ({ data }) => {
                 <button>
                   <FontAwesomeIcon icon={faEdit} className="mx-2" />
                 </button>
-                <button>
+                <button
+                  onClick={(e) => {
+                    const tr = e.target.closest("tr");
+                    const id = tr.getAttribute("data-id");
+                    onDelete(id);
+                  }}
+                >
                   <FontAwesomeIcon icon={faTrash} className="mx-2" />
                 </button>
               </td>
@@ -51,6 +58,7 @@ const Transactions = () => {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [category, setCategory] = useState("Spesa Occasionale");
+  const { deleteTransaction } = useDeleteTransactions();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,6 +67,10 @@ const Transactions = () => {
     setDescription("");
     setDate(new Date().toISOString().split("T")[0]);
     setCategory("Spesa Occasionale");
+  };
+
+  const handleDelete = async (id) => {
+    await deleteTransaction(id);
   };
 
   return (
@@ -144,7 +156,7 @@ const Transactions = () => {
         <div>
           <h1 className="text-3xl mb-6">Transazioni</h1>
           {transactions.length > 0 ? (
-            <DynamicGrid data={transactions} />
+            <DynamicGrid data={transactions} onDelete={handleDelete} />
           ) : (
             <p>Nessuna transazione trovata.</p>
           )}
