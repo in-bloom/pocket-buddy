@@ -24,7 +24,7 @@ const Dashboard = () => {
   const { transactions } = useGetTransactions();
 
   const data = {
-    labels: transactions.map((transaction) => transaction.data),
+    labels: transactions.map((transaction) => transaction.category),
     datasets: [
       {
         label: "Spese",
@@ -57,8 +57,11 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-screen p-4">
-      <Pie data={data} options={options} />
+    <div className="bg-gray-100 h-screen p-4 flex justify-center items-center">
+      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl flex flex-col">
+        <h1>Bilancio</h1>
+        <Pie data={data} options={options} />
+      </div>
     </div>
   );
 };

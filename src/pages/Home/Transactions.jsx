@@ -2,54 +2,7 @@ import React, { useState } from "react";
 import { useAddTransactions } from "../../hooks/useAddTransactions";
 import useGetTransactions from "../../hooks/useGetTransactions";
 import useDeleteTransactions from "../../hooks/useDeleteTransactions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-
-const DynamicGrid = ({ data, onDelete }) => {
-  return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white border border-gray-200">
-        <thead>
-          <tr>
-            <th className="border-b">Descrizione</th>
-            <th className="border-b">Importo</th>
-            <th className="border-b">Categoria</th>
-            <th className="border-b">Data</th>
-            <th className="border-b">Modifica</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr
-              key={index}
-              className="hover:bg-gray-100 text-center"
-              data-id={item.id}
-            >
-              <td className="border-b">{item.description}</td>
-              <td className="border-b">{item.amount}€</td>
-              <td className="border-b">{item.category}</td>
-              <td className="border-b">{item.data}</td>
-              <td className="border-b">
-                <button>
-                  <FontAwesomeIcon icon={faEdit} className="mx-2" />
-                </button>
-                <button
-                  onClick={(e) => {
-                    const tr = e.target.closest("tr");
-                    const id = tr.getAttribute("data-id");
-                    onDelete(id);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faTrash} className="mx-2" />
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+import DynamicGrid from "./DynamicGrid";
 
 const Transactions = () => {
   const { addTransaction } = useAddTransactions();
@@ -59,10 +12,11 @@ const Transactions = () => {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [category, setCategory] = useState("Spesa Occasionale");
   const { deleteTransaction } = useDeleteTransactions();
+  const [typeOfTransaction, setTypeOfTransaction] = useState("expense");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTransaction(amount, description, category, date);
+    addTransaction(amount, description, category, date, typeOfTransaction);
     setAmount("");
     setDescription("");
     setDate(new Date().toISOString().split("T")[0]);
@@ -91,6 +45,7 @@ const Transactions = () => {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              inputMode="float"
               required
             />
           </div>
@@ -129,6 +84,42 @@ const Transactions = () => {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="typeoftransaction"
+            >
+              Tipo di Transazione
+            </label>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="expense"
+                name="typeoftransaction"
+                value="expense"
+                checked={typeOfTransaction === "expense" ? true : false}
+                onChange={(e) => setTypeOfTransaction(e.target.value)}
+                className="mr-2 leading-tight"
+              />
+              <label htmlFor="expense" className="text-gray-700">
+                Spesa
+              </label>
+            </div>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="income"
+                name="typeoftransaction"
+                value="income"
+                checked={typeOfTransaction === "income" ? true : false}
+                onChange={(e) => setTypeOfTransaction(e.target.value)}
+                className="mr-2 leading-tight"
+              />
+              <label htmlFor="income" className="text-gray-700">
+                Guadagno
+              </label>
+            </div>
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
               htmlFor="category"
             >
               Categoria Transazione
@@ -140,10 +131,13 @@ const Transactions = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             >
-              <option value="Spesa Fissa">Spesa Fissa</option>
-              <option value="Spesa Occasionale">Spesa Occasionale</option>
-              <option value="Guadagno Fisso">Guadagno Fisso</option>
-              <option value="Guadagno Occasionale">Guadagno Occasionale</option>
+              <option value="Altro">Altro</option>
+              <option value="Cibo">Cibo</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Trasporti">Trasporti</option>
+              <option value="Svago">Svago</option>
+              <option value="Viaggi">Viaggi</option>
+              <option value="Imprevisti">Imprevisti</option>
             </select>
           </div>
           <button

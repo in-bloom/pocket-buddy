@@ -33,7 +33,7 @@ const useGetTransactions = () => {
         let docs = [];
         snapshot.forEach((doc) => {
           const data = doc.data();
-          if (data.category.startsWith("S")) {
+          if (data.type.startsWith("e")) {
             data.amount = -1 * data.amount;
           } else {
             data.amount = 1 * data.amount;
@@ -66,7 +66,7 @@ const useGetTransactions = () => {
       let docs = [];
       snapshot.forEach((doc) => {
         const data = doc.data();
-        if (data.category.startsWith("S")) {
+        if (data.type.startsWith("e")) {
           data.amount = -1 * data.amount;
         } else {
           data.amount = 1 * data.amount;
