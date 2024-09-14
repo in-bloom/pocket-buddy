@@ -10,7 +10,7 @@ const Transactions = () => {
   const [amount, setAmount] = useState(0);
   const [description, setDescription] = useState("");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
-  const [category, setCategory] = useState("Spesa Occasionale");
+  const [category, setCategory] = useState("Altro");
   const { deleteTransaction } = useDeleteTransactions();
   const [typeOfTransaction, setTypeOfTransaction] = useState("expense");
 
@@ -20,7 +20,7 @@ const Transactions = () => {
     setAmount("");
     setDescription("");
     setDate(new Date().toISOString().split("T")[0]);
-    setCategory("Spesa Occasionale");
+    setCategory("Altro");
   };
 
   const handleDelete = async (id) => {
@@ -28,8 +28,8 @@ const Transactions = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-100 h-screen">
-      <div className="h-10/12 overflow-y-scroll w-full px-8 py-3">
+    <div className="flex flex-col items-center bg-gray-800 justify-center h-screen py-7 pr-5">
+      <div className="h-full overflow-y-scroll bg-gray-100 w-full p-10 rounded-lg">
         <form onSubmit={handleSubmit} className="mb-8">
           <h1 className="text-3xl mb-6">Aggiungi una Transazione</h1>
           <div className="mb-4">
