@@ -1,62 +1,77 @@
 import React from "react";
-import { Pie } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import EChartsReact from "echarts-for-react";
 
 const GraficoCategorie = ({ transactions }) => {
-  const data = {
-    labels: transactions.map((transaction) => transaction.category),
-    datasets: [
+  const data_raw = transactions.reduce((acc, curr) => {
+    const category = curr.category || "Altro";
+    if (!acc[category]) {
+      acc[category] = 0;
+    }
+    acc[category] += curr.amount;
+    return acc;
+  }, {});
+
+  console.log(data_raw);
+  const data = Object.keys(data_raw).map((key) => ({
+    name: key,
+    value: data_raw[key],
+  }));
+
+  const option = {
+    title: {
+      text: "Grafico delle Spese Mensili",
+      left: "center",
+    },
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      orient: "vertical",
+      bottom: "bottom",
+    },
+    series: [
       {
-        label: "Spese",
-        data: transactions.map((transaction) =>
-          transaction.amount < 0 ? transaction.amount : null
-        ),
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.6)",
-          "rgba(54, 162, 235, 0.6)",
-          "rgba(255, 206, 86, 0.6)",
-          "rgba(75, 192, 192, 0.6)",
-          "rgba(153, 102, 255, 0.6)",
-          "rgba(255, 159, 64, 0.6)",
-        ],
-        borderWidth: 0,
+        name: "Spese per Categoria",
+        type: "pie",
+        radius: "55%",
+        center: ["50%", "50%"],
+        data: data,
+        itemStyle: {
+          normal: {
+            color: (params) => {
+              const colors = [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56",
+                "#4BC0C0",
+                "#9966FF",
+                "#FF9F40",
+              ];
+              return colors[params.dataIndex % colors.length];
+            },
+            shadowBlur: 200,
+            shadowColor: "rgba(209, 213, 219, 1)",
+          },
+        },
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(209, 213, 219, 1.9)",
+          },
+        },
+        animationType: "scale",
+        animationEasing: "elasticOut",
+        animationDelay: function (idx) {
+          return Math.random() * 200;
+        },
       },
     ],
   };
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Grafico delle Spese Mensili",
-      },
-    },
-  };
-
   return (
-    <div className="bg-gray-100 shadow-lg rounded-lg p-6 w-96">
-      <Pie data={data} options={options} />
+    <div className="bg-gray-100 shadow-lg rounded-lg p-6 w-1/3">
+      <EChartsReact option={option} style={{ width: "100%", height: "45vh" }} />
     </div>
   );
 };

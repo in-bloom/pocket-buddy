@@ -26,9 +26,8 @@ const useGetTransactions = () => {
       const transactionsQuery = query(
         transactionsCollection,
         where("userId", "==", userId),
-        orderBy("data")
-        /* limit(TRANSACTION_LIMIT)
-         */
+        orderBy("data"),
+        limit(TRANSACTION_LIMIT)
       );
       unsubscribe = onSnapshot(transactionsQuery, (snapshot) => {
         let docs = [];
