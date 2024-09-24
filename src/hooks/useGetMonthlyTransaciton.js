@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { db } from "../config/firebase-config";
 import useUserInfo from "./useUserInfo";
 
-const useGetMonthlyExpenses = () => {
+const useGetMonthlyTransaciton = () => {
   const { userId } = useUserInfo();
   const [monthlyExpenses, setMonthlyExpenses] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -24,12 +24,12 @@ const useGetMonthlyExpenses = () => {
     const endOfMonth = `${year}-${String(month).padStart(2, "0")}-${new Date(year, month, 0).getDate()}`;
 
     try {
-      const transactionsQuery = query(
+      let transactionsQuery;
+      transactionsQuery = query(
         transactionsCollection,
         where("userId", "==", userId),
         where("data", ">=", startOfMonth),
         where("data", "<=", endOfMonth),
-        where("type", "==", "expense"),
         orderBy("data")
       );
 
@@ -66,4 +66,4 @@ const useGetMonthlyExpenses = () => {
   return { monthlyExpenses, loading };
 };
 
-export default useGetMonthlyExpenses;
+export default useGetMonthlyTransaciton;

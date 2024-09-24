@@ -12,11 +12,10 @@ const Transactions = () => {
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
   const [category, setCategory] = useState("Altro");
   const { deleteTransaction } = useDeleteTransactions();
-  const [typeOfTransaction, setTypeOfTransaction] = useState("expense");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTransaction(amount, description, category, date, typeOfTransaction);
+    addTransaction(amount, description, category, date, "expense");
     setAmount("");
     setDescription("");
     setDate(new Date().toISOString().split("T")[0]);
@@ -80,42 +79,6 @@ const Transactions = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               required
             />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="typeoftransaction"
-            >
-              Tipo di Transazione
-            </label>
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="expense"
-                name="typeoftransaction"
-                value="expense"
-                checked={typeOfTransaction === "expense" ? true : false}
-                onChange={(e) => setTypeOfTransaction(e.target.value)}
-                className="mr-2 leading-tight"
-              />
-              <label htmlFor="expense" className="text-gray-700">
-                Spesa
-              </label>
-            </div>
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="income"
-                name="typeoftransaction"
-                value="income"
-                checked={typeOfTransaction === "income" ? true : false}
-                onChange={(e) => setTypeOfTransaction(e.target.value)}
-                className="mr-2 leading-tight"
-              />
-              <label htmlFor="income" className="text-gray-700">
-                Guadagno
-              </label>
-            </div>
           </div>
           <div className="mb-4">
             <label

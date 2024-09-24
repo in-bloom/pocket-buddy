@@ -11,7 +11,6 @@ const GraficoCategorie = ({ transactions }) => {
     return acc;
   }, {});
 
-  console.log(data_raw);
   const data = Object.keys(data_raw).map((key) => ({
     name: key,
     value: data_raw[key],
@@ -70,9 +69,11 @@ const GraficoCategorie = ({ transactions }) => {
   };
 
   return (
-    <div className="bg-gray-100 shadow-lg rounded-lg p-6 w-1/3">
-      <EChartsReact option={option} style={{ width: "100%", height: "45vh" }} />
-    </div>
+    <EChartsReact
+      option={option}
+      data={data}
+      style={{ width: "100%", height: "100%" }}
+    />
   );
 };
 

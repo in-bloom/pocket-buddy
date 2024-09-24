@@ -1,8 +1,39 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
+const col = (onDelete) => [
+  { field: "description", headerName: "Descrizione", width: 200 },
+  {
+    field: "amount",
+    headerName: "Importo",
+    width: 200,
+    valueFormatter: (params) => {
+      return `-${params}€`;
+    },
+  },
+  { field: "category", headerName: "Categoria", width: 200 },
+  { field: "data", headerName: "Data", width: 200 },
+  {
+    field: "delete",
+    headerName: "Elimina",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <button
+          onClick={() => {
+            const id = params.row.id;
+            onDelete(id);
+          }}
+        >
+          <FontAwesomeIcon icon={faTrash} className="mx-2" />
+        </button>
+      );
+    },
+  },
+];
 const DynamicGrid = ({ data, onDelete }) => {
-  return (
+  /* return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white border border-gray-200">
         <thead>
@@ -26,21 +57,23 @@ const DynamicGrid = ({ data, onDelete }) => {
               <td className="border-b">{item.category}</td>
               <td className="border-b">{item.data}</td>
               <td className="border-b">
-                <button
-                  onClick={(e) => {
-                    const tr = e.target.closest("tr");
-                    const id = tr.getAttribute("data-id");
-                    onDelete(id);
-                    console.log(id);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faTrash} className="mx-2" />
-                </button>
+                
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+    </div>
+  ); */
+
+  return (
+    <div style={{ height: 400, width: "100%" }}>
+      <DataGrid
+        rows={data}
+        columns={col(onDelete)}
+        pageSize={10}
+        slots={{ toolbar: GridToolbar }}
+      />
     </div>
   );
 };
