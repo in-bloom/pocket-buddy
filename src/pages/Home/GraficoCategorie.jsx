@@ -7,7 +7,7 @@ const GraficoCategorie = ({ transactions }) => {
     if (!acc[category]) {
       acc[category] = 0;
     }
-    acc[category] += curr.amount;
+    acc[category] += Number(curr.amount);
     return acc;
   }, {});
 
@@ -23,6 +23,7 @@ const GraficoCategorie = ({ transactions }) => {
     },
     tooltip: {
       trigger: "item",
+      formatter: "{b}: {c}€ <br/> ({d}%)",
     },
     legend: {
       orient: "vertical",
@@ -39,12 +40,12 @@ const GraficoCategorie = ({ transactions }) => {
           normal: {
             color: (params) => {
               const colors = [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56",
-                "#4BC0C0",
-                "#9966FF",
-                "#FF9F40",
+                "#B0BEC5",
+                "#A5D6A7",
+                "#90A4AE",
+                "#D7CCC8",
+                "#F8BBD0",
+                "#FFF9C4",
               ];
               return colors[params.dataIndex % colors.length];
             },

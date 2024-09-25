@@ -9,7 +9,7 @@ const col = (onDelete) => [
     headerName: "Importo",
     width: 200,
     valueFormatter: (params) => {
-      return `-${params}€`;
+      return `${params}€`;
     },
   },
   { field: "category", headerName: "Categoria", width: 200 },

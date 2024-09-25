@@ -8,12 +8,14 @@ const GraficoMensile = ({ transactions }) => {
 
   const exp_per_data = [];
   let cumulative = 0;
+  const dates = [];
 
   for (let i = start; i <= end; i = addDays(i, 1)) {
     const formattedDate = format(i, "yyyy-MM-dd");
     const dailyTransactions = transactions.filter(
       (t) => t.data === String(formattedDate)
     );
+    dates.push(String(formattedDate));
     const dailySum = dailyTransactions.reduce(
       (acc, curr) => acc + Number(curr.amount),
       0
@@ -22,6 +24,13 @@ const GraficoMensile = ({ transactions }) => {
     exp_per_data.push(cumulative);
   }
 
+  const filteredDates = dates.filter((date, index) => {
+    return transactions.some((t) => t.data === date) || index % 5 === 0;
+  });
+  const filteredData = exp_per_data.filter((_, index) => {
+    return transactions.some((t) => t.data === dates[index]) || index % 5 === 0;
+  });
+
   const option = {
     title: {
       text: "Spese Mensili Cumulative",
@@ -29,6 +38,7 @@ const GraficoMensile = ({ transactions }) => {
     },
     tooltip: {
       trigger: "axis",
+      formatter: "{b}: {c}€",
     },
     legend: {
       data: ["Spese Cumulative"],
@@ -36,13 +46,7 @@ const GraficoMensile = ({ transactions }) => {
     },
     xAxis: {
       type: "category",
-      data: exp_per_data.map((_, index) =>
-        format(addDays(start, index), "yyyy-MM-dd")
-      ),
-      axisLabel: {
-        rotate: 45,
-        interval: 0,
-      },
+      data: filteredDates,
     },
     yAxis: {
       type: "value",
@@ -56,7 +60,7 @@ const GraficoMensile = ({ transactions }) => {
     series: [
       {
         name: "Spese Cumulative",
-        data: exp_per_data,
+        data: filteredData,
         type: "line",
         smooth: true,
         lineStyle: {
@@ -65,9 +69,6 @@ const GraficoMensile = ({ transactions }) => {
         },
         itemStyle: {
           color: "#5470C6",
-        },
-        areaStyle: {
-          color: "rgba(84, 112, 198, 0.2)",
         },
       },
     ],
