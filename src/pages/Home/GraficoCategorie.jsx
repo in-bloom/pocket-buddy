@@ -1,7 +1,10 @@
 import React from "react";
 import EChartsReact from "echarts-for-react";
+import { useMediaQuery } from "react-responsive";
 
 const GraficoCategorie = ({ transactions }) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
   const data_raw = transactions.reduce((acc, curr) => {
     const category = curr.category || "Altro";
     if (!acc[category]) {
@@ -49,8 +52,8 @@ const GraficoCategorie = ({ transactions }) => {
               ];
               return colors[params.dataIndex % colors.length];
             },
-            shadowBlur: 200,
-            shadowColor: "rgba(209, 213, 219, 1)",
+            shadowBlur: isMobile ? 0 : 50,
+            shadowColor: isMobile ? "transparent" : "rgba(209, 213, 219, 1)",
           },
         },
         emphasis: {
@@ -73,7 +76,7 @@ const GraficoCategorie = ({ transactions }) => {
     <EChartsReact
       option={option}
       data={data}
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%", zIndex: 98 }}
     />
   );
 };

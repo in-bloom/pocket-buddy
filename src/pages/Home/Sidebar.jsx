@@ -11,7 +11,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="h-screen w-72 bg-gray-800 text-white flex flex-col items-center">
+    <div className="h-screen w-72 bg-gray-800 text-white flex flex-col items-center z-50">
       <div className="flex flex-col items-center mt-8 p-4">
         <img
           src={user.profilePic}

@@ -61,10 +61,21 @@ const BarGraph = ({ transactions }) => {
         type: "bar",
       },
     ],
+    dataZoom: [
+      {
+        type: "slider",
+        start: 0,
+        end: 40,
+        bottom: 7,
+      },
+    ],
   };
 
   return (
-    <EChartsReact option={option} style={{ width: "100%", height: "100%" }} />
+    <EChartsReact
+      option={option}
+      style={{ width: "100%", height: "100%", zIndex: 98 }}
+    />
   );
 };
 

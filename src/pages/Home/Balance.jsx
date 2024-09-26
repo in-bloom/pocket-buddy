@@ -1,7 +1,8 @@
 import useGetBudget from "../../hooks/useGetBudget";
 import EChartsReact from "echarts-for-react";
+import { memo } from "react";
 
-const Balance = ({ transactions }) => {
+const Balance = memo(({ transactions }) => {
   const { budget } = useGetBudget();
   const spese = transactions.reduce(
     (acc, curr) => acc + Number(curr.amount),
@@ -10,15 +11,13 @@ const Balance = ({ transactions }) => {
   const bilancio = budget - spese;
 
   const option = {
-    title: {
-      text: "Bilancio",
-      left: "center",
-    },
     series: [
       {
         type: "gauge",
         startAngle: 90,
         endAngle: -269.99,
+        radius: "90%",
+        center: ["50%", "50%"],
         pointer: {
           show: false,
         },
@@ -26,10 +25,10 @@ const Balance = ({ transactions }) => {
           show: true,
           overlap: false,
           roundCap: true,
-          clip: false,
+          clip: true,
           itemStyle: {
-            borderWidth: 1,
-            borderColor: "#464646",
+            borderWidth: 0,
+            borderColor: "#yellow",
           },
         },
         axisLine: {
@@ -47,7 +46,6 @@ const Balance = ({ transactions }) => {
         },
         axisLabel: {
           show: false,
-          distance: 50,
         },
         data: [{ value: ((spese / budget) * 100).toFixed(2) }],
         title: {
@@ -55,14 +53,14 @@ const Balance = ({ transactions }) => {
         },
         detail: {
           width: 150,
-          height: 40,
-          fontSize: 14,
-          color: "inherit",
+          height: 80,
+          fontSize: 18,
+          color: "white",
           borderColor: "inherit",
           borderRadius: 0,
           borderWidth: 0,
-          formatter: `{value}%\nBilancio: €${bilancio}`,
-          offsetCenter: [0, "0%"], // Centrare il dettaglio
+          formatter: `Bilancio: €${bilancio}\nSpseso: {value}%`,
+          offsetCenter: [0, "0%"],
           rich: {
             value: {
               fontSize: 20,
@@ -71,10 +69,23 @@ const Balance = ({ transactions }) => {
               fontWeight: "bold",
             },
             bilancio: {
-              fontSize: 16,
+              fontSize: 18,
               lineHeight: 20,
               color: "#000",
             },
+          },
+          markPoint: {
+            data: [
+              {
+                coord: ["value"],
+                value: spese,
+                symbol: "circle",
+                symbolSize: 20,
+                itemStyle: {
+                  color: "red",
+                },
+              },
+            ],
           },
         },
       },
@@ -84,6 +95,6 @@ const Balance = ({ transactions }) => {
   return (
     <EChartsReact option={option} style={{ width: "100%", height: "100%" }} />
   );
-};
+});
 
 export default Balance;

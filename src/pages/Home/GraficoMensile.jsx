@@ -40,10 +40,6 @@ const GraficoMensile = ({ transactions }) => {
       trigger: "axis",
       formatter: "{b}: {c}€",
     },
-    legend: {
-      data: ["Spese Cumulative"],
-      top: "bottom",
-    },
     xAxis: {
       type: "category",
       data: filteredDates,
@@ -53,16 +49,12 @@ const GraficoMensile = ({ transactions }) => {
       axisLabel: {
         formatter: "{value} €",
       },
-      splitLine: {
-        show: true,
-      },
     },
     series: [
       {
         name: "Spese Cumulative",
         data: filteredData,
         type: "line",
-
         lineStyle: {
           color: "#5470C6",
           width: 3,
@@ -72,10 +64,21 @@ const GraficoMensile = ({ transactions }) => {
         },
       },
     ],
+    dataZoom: [
+      {
+        type: "slider",
+        start: 0,
+        end: 25, // Visualizza tre mesi alla volta (25% di 12 mesi)
+        bottom: 7, // Aggiungi spazio tra il grafico e lo slider
+      },
+    ],
   };
 
   return (
-    <EChartsReact option={option} style={{ height: "100%", width: "100%" }} />
+    <EChartsReact
+      option={option}
+      style={{ height: "100%", width: "100%", zIndex: 98 }}
+    />
   );
 };
 
