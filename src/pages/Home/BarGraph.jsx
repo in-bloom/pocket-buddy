@@ -41,7 +41,7 @@ const BarGraph = ({ transactions }) => {
 
   const option = {
     title: {
-      text: "Spese Mensili in questo anno",
+      text: "Spese totali per mese",
       left: "center",
     },
     xAxis: {

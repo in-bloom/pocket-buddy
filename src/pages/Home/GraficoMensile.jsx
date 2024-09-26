@@ -33,7 +33,7 @@ const GraficoMensile = ({ transactions }) => {
 
   const option = {
     title: {
-      text: "Spese Mensili Cumulative",
+      text: "Andamento delle spese in questo mese",
       left: "center",
     },
     tooltip: {
@@ -62,7 +62,7 @@ const GraficoMensile = ({ transactions }) => {
         name: "Spese Cumulative",
         data: filteredData,
         type: "line",
-        smooth: true,
+
         lineStyle: {
           color: "#5470C6",
           width: 3,

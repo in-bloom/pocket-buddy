@@ -18,7 +18,7 @@ const GraficoCategorie = ({ transactions }) => {
 
   const option = {
     title: {
-      text: "Grafico delle Spese Mensili",
+      text: "Spesa per Categorie",
       left: "center",
     },
     tooltip: {
