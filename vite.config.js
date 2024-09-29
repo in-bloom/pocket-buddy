@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
+      includeAssets: ["apple-touch-icon.png", "mask-icon.svg"],
       manifest: {
         name: "Pocket BUddy",
         short_name: "PocketBuddy",

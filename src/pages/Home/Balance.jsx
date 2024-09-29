@@ -50,11 +50,13 @@ const Balance = memo(({ transactions }) => {
         data: [{ value: ((spese / budget) * 100).toFixed(2) }],
         title: {
           fontSize: 14,
+          fontFamily: "Poppins",
         },
         detail: {
           width: 150,
-          height: 80,
+          height: 65,
           fontSize: 18,
+          fontFamily: "Poppins",
           color: "white",
           borderColor: "inherit",
           borderRadius: 0,

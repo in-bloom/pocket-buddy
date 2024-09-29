@@ -11,7 +11,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="h-screen w-72 bg-gray-800 text-white flex flex-col items-center z-50">
+    <div className="h-screen w-72 bg-indigo-900 text-white flex flex-col items-center z-50">
       <div className="flex flex-col items-center mt-8 p-4">
         <img
           src={user.profilePic}
@@ -22,26 +22,26 @@ const Sidebar = () => {
       </div>
       <div className="w-full mt-12 flex flex-col">
         <button
-          className="w-full h-14 bg-gray-800 hover:bg-gray-600 text-2xl text-left pl-10"
+          className="w-full h-14 bg-indigo-900 hover:bg-indigo-800 text-2xl text-left pl-10"
           onClick={() => navigate("dashboard")}
         >
           Bilancio
         </button>
         <button
-          className="w-full h-14 bg-gray-800 hover:bg-gray-600 text-2xl text-left pl-10 mt-6"
+          className="w-full h-14 bg-indigo-900 hover:bg-indigo-800 text-2xl text-left pl-10 mt-6"
           onClick={() => navigate("transactions")}
         >
           Gestisci Transazioni
         </button>
         <button
-          className="w-full h-14 bg-gray-800 hover:bg-gray-600 text-2xl text-left pl-10 mt-6"
+          className="w-full h-14 bg-indigo-900 hover:bg-indigo-800 text-2xl text-left pl-10 mt-6"
           onClick={() => navigate("settings")}
         >
           Impostazioni
         </button>
       </div>
       <button
-        className="w-full h-14 bg-gray-800 hover:bg-gray-600 text-2xl text-left pl-10 mt-auto"
+        className="w-full h-14 bg-indigo-900 hover:bg-indigo-800 text-2xl text-left pl-10 mt-auto"
         onClick={logout}
       >
         Logout

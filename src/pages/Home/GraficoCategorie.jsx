@@ -1,6 +1,7 @@
 import React from "react";
 import EChartsReact from "echarts-for-react";
 import { useMediaQuery } from "react-responsive";
+import { color } from "echarts";
 
 const GraficoCategorie = ({ transactions }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -23,14 +24,25 @@ const GraficoCategorie = ({ transactions }) => {
     title: {
       text: "Spesa per Categorie",
       left: "center",
+      textStyle: {
+        color: "white",
+        fontFamily: "Poppins",
+      },
     },
     tooltip: {
       trigger: "item",
       formatter: "{b}: {c}€ <br/> ({d}%)",
+      textStyle: {
+        fontFamily: "Poppins",
+      },
     },
     legend: {
       orient: "vertical",
       bottom: "bottom",
+      textStyle: {
+        fontFamily: "Poppins",
+        color: "white",
+      },
     },
     series: [
       {
@@ -53,14 +65,14 @@ const GraficoCategorie = ({ transactions }) => {
               return colors[params.dataIndex % colors.length];
             },
             shadowBlur: isMobile ? 0 : 50,
-            shadowColor: isMobile ? "transparent" : "rgba(209, 213, 219, 1)",
+            shadowColor: isMobile ? "transparent" : "rgb(49, 46, 129, 1)",
           },
         },
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
-            shadowColor: "rgba(209, 213, 219, 1.9)",
+            shadowColor: "rgb(49, 46, 129, 1.9)",
           },
         },
         animationType: "scale",

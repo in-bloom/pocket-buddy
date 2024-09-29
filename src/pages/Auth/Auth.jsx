@@ -28,7 +28,8 @@ export const Auth = () => {
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10">
         <div className="text-white text-center">
           <h1 className="p-5 text-4xl md:p-5 md:text-5xl 2xl:text-6xl">
-            Benvenuto su {""}
+            Benvenuto su
+            <br /> {""}
             <strong>
               Pocket Buddy <span>&reg;</span>
             </strong>

@@ -33,8 +33,12 @@ const GraficoMensile = ({ transactions }) => {
 
   const option = {
     title: {
-      text: "Andamento delle spese in questo mese",
+      text: "Andamento delle spese",
       left: "center",
+      textStyle: {
+        color: "white",
+        fontFamily: "Poppins",
+      },
     },
     tooltip: {
       trigger: "axis",
@@ -43,11 +47,20 @@ const GraficoMensile = ({ transactions }) => {
     xAxis: {
       type: "category",
       data: filteredDates,
+      lineStyle: {
+        color: "white",
+        fontFamily: "Poppins",
+      },
     },
     yAxis: {
       type: "value",
       axisLabel: {
         formatter: "{value} €",
+        color: "white",
+      },
+      lineStyle: {
+        color: "white",
+        fontFamily: "Poppins",
       },
     },
     series: [
@@ -57,7 +70,7 @@ const GraficoMensile = ({ transactions }) => {
         type: "line",
         lineStyle: {
           color: "#5470C6",
-          width: 3,
+          width: 4,
         },
         itemStyle: {
           color: "#5470C6",
@@ -68,8 +81,8 @@ const GraficoMensile = ({ transactions }) => {
       {
         type: "slider",
         start: 0,
-        end: 25, // Visualizza tre mesi alla volta (25% di 12 mesi)
-        bottom: 7, // Aggiungi spazio tra il grafico e lo slider
+        end: 25,
+        bottom: 7,
       },
     ],
   };

@@ -43,13 +43,29 @@ const BarGraph = ({ transactions }) => {
     title: {
       text: "Spese totali per mese",
       left: "center",
+      textStyle: {
+        color: "white",
+        fontFamily: "Poppins",
+      },
     },
     xAxis: {
       type: "category",
       data: monthNames,
+      lineStyle: {
+        color: "white",
+      },
+      axisLabel: {
+        color: "white",
+      },
     },
     yAxis: {
       type: "value",
+      lineStyle: {
+        color: "white",
+      },
+      axisLabel: {
+        color: "white",
+      },
     },
     tooltip: {
       trigger: "axis",
