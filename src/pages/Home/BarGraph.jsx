@@ -67,6 +67,7 @@ const BarGraph = ({ transactions }) => {
         color: "white",
       },
     },
+
     tooltip: {
       trigger: "axis",
       formatter: "{b}: {c}€",
@@ -75,6 +76,12 @@ const BarGraph = ({ transactions }) => {
       {
         data: Object.values(data),
         type: "bar",
+        lineStyle: {
+          color: "#e2e8f0",
+        },
+        itemStyle: {
+          color: "#e2e8f0",
+        },
       },
     ],
     dataZoom: [

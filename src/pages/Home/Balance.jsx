@@ -27,12 +27,14 @@ const Balance = memo(({ transactions }) => {
           roundCap: true,
           clip: true,
           itemStyle: {
-            borderWidth: 0,
-            borderColor: "#yellow",
+            color: "white",
+            borderWidth: 3,
+            borderColor: "#000",
           },
         },
         axisLine: {
           lineStyle: {
+            color: [[1, "#4b5563"]],
             width: 15,
           },
         },

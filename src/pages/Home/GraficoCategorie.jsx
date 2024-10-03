@@ -37,10 +37,14 @@ const GraficoCategorie = ({ transactions }) => {
       },
     },
     legend: {
-      orient: "vertical",
+      orient: "horizontal",
       bottom: "bottom",
       textStyle: {
         fontFamily: "Poppins",
+        color: "white",
+      },
+      pageIconColor: "white",
+      pageTextStyle: {
         color: "white",
       },
     },
@@ -55,12 +59,13 @@ const GraficoCategorie = ({ transactions }) => {
           normal: {
             color: (params) => {
               const colors = [
-                "#B0BEC5",
-                "#A5D6A7",
-                "#90A4AE",
-                "#D7CCC8",
-                "#F8BBD0",
-                "#FFF9C4",
+                "#1e3a8a",
+                "#1e293b",
+                "#64748b",
+                "#ffffff",
+                "#e2e8f0",
+                "#4b5563",
+                "#9ca3af",
               ];
               return colors[params.dataIndex % colors.length];
             },

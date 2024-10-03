@@ -7,7 +7,6 @@ import {
   faCog,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { memo } from "react";
 
 const NavBarMobile = () => {
   const user = useUserInfo();

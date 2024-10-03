@@ -69,11 +69,11 @@ const GraficoMensile = ({ transactions }) => {
         data: filteredData,
         type: "line",
         lineStyle: {
-          color: "#5470C6",
+          color: "#ffffff",
           width: 4,
         },
         itemStyle: {
-          color: "#5470C6",
+          color: "black",
         },
       },
     ],

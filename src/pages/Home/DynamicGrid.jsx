@@ -3,21 +3,19 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 const col = (onDelete) => [
-  { field: "description", headerName: "Descrizione", width: 300 },
+  { field: "description", headerName: "Descrizione" },
   {
     field: "amount",
     headerName: "Importo",
-    width: 300,
     valueFormatter: (params) => {
       return `${params}€`;
     },
   },
-  { field: "category", headerName: "Categoria", width: 300 },
-  { field: "data", headerName: "Data", width: 250 },
+  { field: "category", headerName: "Categoria" },
+  { field: "data", headerName: "Data" },
   {
     field: "delete",
     headerName: "Elimina",
-    width: 150,
     renderCell: (params) => {
       return (
         <button
@@ -34,12 +32,34 @@ const col = (onDelete) => [
 ];
 const DynamicGrid = ({ data, onDelete }) => {
   return (
-    <div style={{ width: "100" }}>
+    <div style={{ width: "100%", height: "100%" }}>
       <DataGrid
         rows={data}
         columns={col(onDelete)}
         pageSize={10}
         slots={{ toolbar: GridToolbar }}
+        sx={{
+          "& .MuiDataGrid-root": {
+            backgroundColor: "#ffffff",
+          },
+          "& .MuiDataGrid-cell": {
+            color: "#e2e8f0",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: "#e2e8f0",
+            color: "1e3a8a",
+            fontSize: "1rem",
+            fontWeight: "bold",
+          },
+          "& .MuiDataGrid-footerContainer": {
+            backgroundColor: "#e2e8f0",
+            color: "#ffffff",
+          },
+          "& .MuiDataGrid-toolbarContainer": {
+            backgroundColor: "#e2e8f0",
+            color: "#ffffff",
+          },
+        }}
       />
     </div>
   );

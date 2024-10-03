@@ -19,10 +19,12 @@ const AddTransaction = () => {
 
   return (
     <form onSubmit={handleSubmit} className="mb-8">
-      <h1 className="text-3xl mb-6">Aggiungi una Transazione</h1>
+      <h1 className="text-2xl mb-6 text-white">
+        <b>Aggiungi una Transazione</b>
+      </h1>
       <div className="mb-4">
         <label
-          className="block text-gray-700 text-sm font-bold mb-2"
+          className="block text-white text-sm font-bold mb-2"
           htmlFor="amount"
         >
           Quantità
@@ -32,14 +34,14 @@ const AddTransaction = () => {
           id="amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-indigo-800 leading-tight focus:outline-none focus:shadow-outline"
           inputMode="float"
           required
         />
       </div>
       <div className="mb-4">
         <label
-          className="block text-gray-700 text-sm font-bold mb-2"
+          className="block text-white text-sm font-bold mb-2"
           htmlFor="description"
         >
           Descrizione
@@ -49,13 +51,13 @@ const AddTransaction = () => {
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-indigo-800 leading-tight focus:outline-none focus:shadow-outline"
           required
         />
       </div>
       <div className="mb-4">
         <label
-          className="block text-gray-700 text-sm font-bold mb-2"
+          className="block text-white text-sm font-bold mb-2"
           htmlFor="date"
         >
           Data Transazione
@@ -65,13 +67,13 @@ const AddTransaction = () => {
           id="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-indigo-800 leading-tight focus:outline-none focus:shadow-outline"
           required
         />
       </div>
       <div className="mb-4">
         <label
-          className="block text-gray-700 text-sm font-bold mb-2"
+          className="block text-white text-sm font-bold mb-2"
           htmlFor="category"
         >
           Categoria Transazione
@@ -80,7 +82,7 @@ const AddTransaction = () => {
           id="category"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-indigo-800 leading-tight focus:outline-none focus:shadow-outline"
           required
         >
           <option value="Altro">Altro</option>
@@ -94,9 +96,9 @@ const AddTransaction = () => {
       </div>
       <button
         type="submit"
-        className="w-full py-2 px-4 bg-gray-800 text-white rounded-lg hover:bg-slate-700 transition duration-300"
+        className="w-full py-2 px-4 bg-indigo-500 text-white rounded-lg hover:bg-slate-700 transition duration-300"
       >
-        Aggiungi Transazione
+        <b>Aggiungi Transazione</b>
       </button>
     </form>
   );
