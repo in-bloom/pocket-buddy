@@ -25,4 +25,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run script with secrets
-        run: echo REACT_APP_FIREBASE_AUTH_DOMAIN
+        run: echo $REACT_APP_FIREBASE_AUTH_DOMAIN
