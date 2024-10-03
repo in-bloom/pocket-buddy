@@ -1,5 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import useUserInfo from "../../hooks/useUserInfo.js";
+import {
+  faHome,
+  faList,
+  faCog,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Sidebar = () => {
   const user = useUserInfo();
@@ -11,40 +18,32 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="h-screen w-72 bg-gray-800 text-white flex flex-col items-center">
-      <div className="flex flex-col items-center mt-8 p-4">
-        <img
-          src={user.profilePic}
-          alt="Immagine profilo"
-          className="w-36 h-36 rounded-full"
-        />
-        <h1 className="text-2xl font-bold mt-5">{user.userName}</h1>
-      </div>
-      <div className="w-full mt-12 flex flex-col">
+    <div className="bg-indigo-900 text-white flex flex-col items-center z-50 p-5 my-4 ml-4 rounded-t-full rounded-b-full">
+      <div className="flex flex-col items-center w-full">
         <button
-          className="w-full h-14 bg-gray-800 hover:bg-gray-600 text-2xl text-left pl-10"
+          className="w-full h-14 bg-indigo-900 text-2xl rounded-t-lg transform transition-transform duration-200 hover:scale-110"
           onClick={() => navigate("dashboard")}
         >
-          Bilancio
+          <FontAwesomeIcon icon={faHome} />
         </button>
         <button
-          className="w-full h-14 bg-gray-800 hover:bg-gray-600 text-2xl text-left pl-10 mt-6"
+          className="w-full h-14 bg-indigo-900 transform transition-transform duration-200 hover:scale-110 text-2xl mt-6"
           onClick={() => navigate("transactions")}
         >
-          Gestisci Transazioni
+          <FontAwesomeIcon icon={faList} />
         </button>
         <button
-          className="w-full h-14 bg-gray-800 hover:bg-gray-600 text-2xl text-left pl-10 mt-6"
+          className="w-full h-14 bg-indigo-900 transform transition-transform duration-200 hover:scale-110 text-2xl mt-6 rounded-b-lg"
           onClick={() => navigate("settings")}
         >
-          Impostazioni
+          <FontAwesomeIcon icon={faCog} />
         </button>
       </div>
       <button
-        className="w-full h-14 bg-gray-800 hover:bg-gray-600 text-2xl text-left pl-10 mt-auto"
+        className="w-full h-14 bg-indigo-900 transform transition-transform duration-200 hover:scale-110 text-2xl mt-auto"
         onClick={logout}
       >
-        Logout
+        <FontAwesomeIcon icon={faSignOutAlt} />
       </button>
     </div>
   );

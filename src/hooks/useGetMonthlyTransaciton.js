@@ -8,28 +8,37 @@ import {
 import { useState, useEffect } from "react";
 import { db } from "../config/firebase-config";
 import useUserInfo from "./useUserInfo";
+import { subMonths, startOfMonth, endOfMonth, format } from "date-fns";
 
-const useGetMonthlyExpenses = () => {
+const getFourMonthsRange = (now, months) => {
+  const endDate = endOfMonth(now);
+  const startDate = startOfMonth(subMonths(now, months));
+
+  return {
+    startDate: format(startDate, "yyyy-MM-dd"),
+    endDate: format(endDate, "yyyy-MM-dd"),
+  };
+};
+
+const useGetMonthlyTransaciton = (now, months) => {
   const { userId } = useUserInfo();
   const [monthlyExpenses, setMonthlyExpenses] = useState([]);
   const [loading, setLoading] = useState(false);
   const transactionsCollection = collection(db, "transactions");
+  const { startDate: startOfMonth, endDate: endOfMonth } = getFourMonthsRange(
+    now,
+    months
+  );
 
   const getExpenses = () => {
     setLoading(true);
-    const now = new Date();
-    const month = now.getMonth() + 1;
-    const year = now.getFullYear();
-    const startOfMonth = `${year}-${String(month).padStart(2, "0")}-01`;
-    const endOfMonth = `${year}-${String(month).padStart(2, "0")}-${new Date(year, month, 0).getDate()}`;
-
     try {
-      const transactionsQuery = query(
+      let transactionsQuery;
+      transactionsQuery = query(
         transactionsCollection,
         where("userId", "==", userId),
         where("data", ">=", startOfMonth),
         where("data", "<=", endOfMonth),
-        where("type", "==", "expense"),
         orderBy("data")
       );
 
@@ -66,4 +75,4 @@ const useGetMonthlyExpenses = () => {
   return { monthlyExpenses, loading };
 };
 
-export default useGetMonthlyExpenses;
+export default useGetMonthlyTransaciton;

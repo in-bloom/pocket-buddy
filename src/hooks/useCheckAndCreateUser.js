@@ -9,6 +9,7 @@ const useCheckAndCreateUser = async (user) => {
     await setDoc(userRef, {
       userName: user.displayName,
       profilePic: user.photoURL,
+      budget: 0,
     });
   }
 

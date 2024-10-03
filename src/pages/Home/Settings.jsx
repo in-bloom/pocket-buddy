@@ -2,8 +2,10 @@ import React from "react";
 
 const Settings = () => {
   return (
-    <div className="bg-gray-800 h-screen py-7 pr-5 flex justify-center items-center">
-      <div className="h-full w-full bg-gray-300 rounded-lg"></div>
+    <div className="flex flex-col justify-center align-middle items-center h-screen">
+      <h1 className="text-white text-3xl">
+        <b>Work in progress...</b>
+      </h1>
     </div>
   );
 };

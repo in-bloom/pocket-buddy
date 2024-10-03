@@ -5,4 +5,12 @@
 * {
   scrollbar-width: none;
   -ms-scrollbar-width: none;
+  font-family: "Poppins";
+}
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }

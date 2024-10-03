@@ -1,17 +1,20 @@
 import React from "react";
 import EChartsReact from "echarts-for-react";
+import { useMediaQuery } from "react-responsive";
+import { color } from "echarts";
 
 const GraficoCategorie = ({ transactions }) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
   const data_raw = transactions.reduce((acc, curr) => {
     const category = curr.category || "Altro";
     if (!acc[category]) {
       acc[category] = 0;
     }
-    acc[category] += curr.amount;
+    acc[category] += Number(curr.amount);
     return acc;
   }, {});
 
-  console.log(data_raw);
   const data = Object.keys(data_raw).map((key) => ({
     name: key,
     value: data_raw[key],
@@ -19,15 +22,31 @@ const GraficoCategorie = ({ transactions }) => {
 
   const option = {
     title: {
-      text: "Grafico delle Spese Mensili",
+      text: "Spesa per Categorie",
       left: "center",
+      textStyle: {
+        color: "white",
+        fontFamily: "Poppins",
+      },
     },
     tooltip: {
       trigger: "item",
+      formatter: "{b}: {c}€ <br/> ({d}%)",
+      textStyle: {
+        fontFamily: "Poppins",
+      },
     },
     legend: {
-      orient: "vertical",
+      orient: "horizontal",
       bottom: "bottom",
+      textStyle: {
+        fontFamily: "Poppins",
+        color: "white",
+      },
+      pageIconColor: "white",
+      pageTextStyle: {
+        color: "white",
+      },
     },
     series: [
       {
@@ -40,24 +59,25 @@ const GraficoCategorie = ({ transactions }) => {
           normal: {
             color: (params) => {
               const colors = [
-                "#FF6384",
-                "#36A2EB",
-                "#FFCE56",
-                "#4BC0C0",
-                "#9966FF",
-                "#FF9F40",
+                "#1e3a8a",
+                "#1e293b",
+                "#64748b",
+                "#ffffff",
+                "#e2e8f0",
+                "#4b5563",
+                "#9ca3af",
               ];
               return colors[params.dataIndex % colors.length];
             },
-            shadowBlur: 200,
-            shadowColor: "rgba(209, 213, 219, 1)",
+            shadowBlur: isMobile ? 0 : 50,
+            shadowColor: isMobile ? "transparent" : "rgb(49, 46, 129, 1)",
           },
         },
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
-            shadowColor: "rgba(209, 213, 219, 1.9)",
+            shadowColor: "rgb(49, 46, 129, 1.9)",
           },
         },
         animationType: "scale",
@@ -70,9 +90,11 @@ const GraficoCategorie = ({ transactions }) => {
   };
 
   return (
-    <div className="bg-gray-100 shadow-lg rounded-lg p-6 w-1/3">
-      <EChartsReact option={option} style={{ width: "100%", height: "45vh" }} />
-    </div>
+    <EChartsReact
+      option={option}
+      data={data}
+      style={{ width: "100%", height: "100%", zIndex: 98 }}
+    />
   );
 };
 
