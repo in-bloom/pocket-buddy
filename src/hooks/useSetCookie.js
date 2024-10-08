@@ -11,7 +11,20 @@ export function getCookie(name) {
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
     while (c.charAt(0) === " ") c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    if (c.indexOf(nameEQ) === 0) {
+      const cookieValue = c.substring(nameEQ.length, c.length);
+      const cookieParts = c.split(";");
+      for (let j = 0; j < cookieParts.length; j++) {
+        const part = cookieParts[j].trim();
+        if (part.startsWith("expires=")) {
+          const expiryDate = new Date(part.substring(8));
+          if (expiryDate < new Date()) {
+            return null;
+          }
+        }
+      }
+      return cookieValue;
+    }
   }
   return null;
 }
