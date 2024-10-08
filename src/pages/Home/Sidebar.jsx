@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import useUserInfo from "../../hooks/useUserInfo.js";
+import { eraseCookie } from "../../hooks/useSetCookie.js";
 import {
   faHome,
   faList,
@@ -9,10 +9,10 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Sidebar = () => {
-  const user = useUserInfo();
   const navigate = useNavigate();
 
   const logout = () => {
+    eraseCookie("authToken");
     localStorage.removeItem("auth");
     navigate("/");
   };

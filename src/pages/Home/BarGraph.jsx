@@ -36,7 +36,7 @@ const BarGraph = ({ transactions }) => {
   };
 
   var data = sumTransactionsByMonth(groupTransactionsByMonth(transactions));
-  data = months.map((month) => data[month] || 0);
+  data = months.map((month) => Number(data[month] || 0).toFixed(2));
   const monthNames = months.map((month) => getMonthName(month));
 
   const option = {
@@ -65,6 +65,7 @@ const BarGraph = ({ transactions }) => {
       },
       axisLabel: {
         color: "white",
+        rotate: 45,
       },
     },
 

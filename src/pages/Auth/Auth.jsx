@@ -1,20 +1,42 @@
 import { useNavigate } from "react-router-dom";
-import { auth, provider } from "../../config/firebase-config";
-import { signInWithPopup } from "firebase/auth";
+import { auth } from "../../config/firebase-config";
 import useCheckAndCreateUser from "../../hooks/useCheckAndCreateUser";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithCustomToken,
+} from "firebase/auth";
+import { setCookie, getCookie } from "../../hooks/useSetCookie";
 import { useState, useEffect } from "react";
 
 export const Auth = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = getCookie("AuthToken");
+    if (token) {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          navigate("/home/dashboard");
+        } else {
+          navigate("/");
+        }
+      });
+    } else {
+      navigate("/");
+    }
+  }, [auth, navigate]);
 
   const signInGoogle = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
+      const result = await signInWithPopup(auth, new GoogleAuthProvider());
       const user = result.user;
       const u_data = await useCheckAndCreateUser(user);
 
       u_data["isAuth"] = true;
       localStorage.setItem("auth", JSON.stringify(u_data));
+      const token = await user.getIdToken();
+      setCookie("AuthToken", token, 7);
       navigate("/home/dashboard");
     } catch (e) {
       console.error(e);
@@ -22,7 +44,7 @@ export const Auth = () => {
   };
 
   return (
-    <div className="relative h-screen w-screen bg-slate-950">
+    <div className="relative h-screen w-screen bg-slate-950 overflow-hidden">
       <div className="absolute bottom-0 left-[-20%] right-0 top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))] 2xl:h-[700px] 2xl:w-[700px]"></div>
       <div className="absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))] 2xl:h-[700px] 2xl:w-[700px]"></div>
       <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10">
