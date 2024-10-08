@@ -6,12 +6,13 @@ import BarGraph from "./BarGraph";
 import Balance from "./Balance";
 import { useMediaQuery } from "react-responsive";
 import useUserInfo from "../../hooks/useUserInfo";
+import logo from "../../assets/logo in da site.png";
 
 const Dashboard = () => {
   const { userName } = useUserInfo();
   const now = new Date();
   const { monthlyExpenses } = useGetMonthlyTransaciton(now, 0);
-  const { monthlyExpenses: fourMonthExp } = useGetMonthlyTransaciton(now, 3);
+  const { monthlyExpenses: fourMonthExp } = useGetMonthlyTransaciton(now, 11);
   const isMobile = useMediaQuery({ maxWidth: 768 });
   return (
     <>
@@ -22,18 +23,14 @@ const Dashboard = () => {
               <h1 className="text-white font-bold text-xl ml-5">Benvenuto!</h1>
               <h1 className="text-white font-bold text-xl ml-5">{userName}</h1>
             </div>
-            <img
-              src="../../../src/assets/logo in da site.png"
-              alt="Logo del Sito"
-              className="w-16 h-16"
-            />
+            <img src={logo} alt="Logo del Sito" className="w-16 h-16" />
           </div>
 
           <div className="grid-cols-1 grid-rows-4 p-4 ">
             <div className="bg-indigo-900 shadow-lg rounded-lg w-full p-4 row-start-1 h-64 mb-4 z-49">
               <Balance transactions={monthlyExpenses} />
             </div>
-            <div className="bg-indigo-900 shadow-lg rounded-lg w-full pl-4 py-4 h-96 mb-4 z-49">
+            <div className="bg-indigo-900 shadow-lg rounded-lg w-full py-4 h-96 mb-4 z-49">
               <GraficoMensile transactions={monthlyExpenses} />
             </div>
             <div className="bg-indigo-900 shadow-lg rounded-lg w-full p-4 h-96 mb-4 z-49">

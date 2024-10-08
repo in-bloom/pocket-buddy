@@ -1,8 +1,10 @@
 import useGetBudget from "../../hooks/useGetBudget";
 import EChartsReact from "echarts-for-react";
 import { memo } from "react";
+import { useMediaQuery } from "react-responsive";
 
 const Balance = memo(({ transactions }) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
   const { budget } = useGetBudget();
   const spese = transactions.reduce(
     (acc, curr) => acc + Number(curr.amount),
@@ -51,29 +53,29 @@ const Balance = memo(({ transactions }) => {
         },
         data: [{ value: ((spese / budget) * 100).toFixed(2) }],
         title: {
-          fontSize: 14,
+          fontSize: isMobile ? 10 : 100,
           fontFamily: "Poppins",
         },
         detail: {
           width: 150,
           height: 65,
-          fontSize: 18,
+          fontSize: isMobile ? 16 : 20,
           fontFamily: "Poppins",
           color: "white",
           borderColor: "inherit",
           borderRadius: 0,
           borderWidth: 0,
-          formatter: `Bilancio: €${bilancio}\nSpseso: {value}%`,
+          formatter: `Bilancio: €${bilancio.toFixed(2)}\nSpseso: {value}%`,
           offsetCenter: [0, "0%"],
           rich: {
             value: {
-              fontSize: 20,
+              fontSize: isMobile ? 16 : 20,
               lineHeight: 30,
               color: "#000",
               fontWeight: "bold",
             },
             bilancio: {
-              fontSize: 18,
+              fontSize: isMobile ? 16 : 20,
               lineHeight: 20,
               color: "#000",
             },

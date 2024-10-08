@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 /* import { VitePWA } from "vite-plugin-pwa"; */
 // https://vitejs.dev/config/
@@ -14,11 +14,11 @@ export default defineConfig({
     VitePWA({
       includeAssets: ["apple-touch-icon.png", "mask-icon.svg"],
       manifest: {
-        name: "Pocket BUddy",
-        short_name: "PocketBuddy",
+        name: "Pocket Buddy",
+        short_name: "Pocket Buddy",
         description: "Gestisci le tue spese in modo semplice",
-        theme_color: "#ffffff",
-        background_color: "#ffffff",
+        theme_color: "#000000",
+        background_color: "#000000",
         display: "standalone",
         start_url: "/",
         icons: [

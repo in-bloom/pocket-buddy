@@ -30,7 +30,7 @@ export const Home = () => {
         <div className="absolute bottom-0 right-[-20%] top-[-10%] h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))] 2xl:h-[700px] 2xl:w-[700px]"></div>
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 z-10"></div>
 
-        <div className="flex h-screen flex-col">
+        <div className="flex h-full flex-col">
           <div className="flex ">
             <div className="flex-grow flex flex-col justify-center">
               <Suspense fallback={<div>Loading...</div>}>

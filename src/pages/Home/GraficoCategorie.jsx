@@ -1,7 +1,6 @@
 import React from "react";
 import EChartsReact from "echarts-for-react";
 import { useMediaQuery } from "react-responsive";
-import { color } from "echarts";
 
 const GraficoCategorie = ({ transactions }) => {
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -79,6 +78,10 @@ const GraficoCategorie = ({ transactions }) => {
             shadowOffsetX: 0,
             shadowColor: "rgb(49, 46, 129, 1.9)",
           },
+        },
+        label: {
+          color: "#FFFFFF",
+          backgroundColor: "transparent",
         },
         animationType: "scale",
         animationEasing: "elasticOut",

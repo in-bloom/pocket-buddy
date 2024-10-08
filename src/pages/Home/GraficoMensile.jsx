@@ -57,6 +57,7 @@ const GraficoMensile = ({ transactions }) => {
       axisLabel: {
         formatter: "{value} €",
         color: "white",
+        rotate: 45,
       },
       lineStyle: {
         color: "white",
@@ -91,6 +92,7 @@ const GraficoMensile = ({ transactions }) => {
     <EChartsReact
       option={option}
       style={{ height: "100%", width: "100%", zIndex: 98 }}
+      className="pl-4"
     />
   );
 };

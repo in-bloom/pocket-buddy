@@ -1,36 +1,50 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import useMediaQuery from "react-responsive";
 
-const col = (onDelete) => [
-  { field: "description", headerName: "Descrizione" },
-  {
-    field: "amount",
-    headerName: "Importo",
-    valueFormatter: (params) => {
-      return `${params}€`;
-    },
-  },
-  { field: "category", headerName: "Categoria" },
-  { field: "data", headerName: "Data" },
-  {
-    field: "delete",
-    headerName: "Elimina",
-    renderCell: (params) => {
-      return (
-        <button
-          onClick={() => {
-            const id = params.row.id;
-            onDelete(id);
-          }}
-        >
-          <FontAwesomeIcon icon={faTrash} className="mx-2" />
-        </button>
-      );
-    },
-  },
-];
 const DynamicGrid = ({ data, onDelete }) => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
+  const col = () => [
+    {
+      field: "description",
+      headerName: "Descrizione",
+      width: isMobile ? 50 : 300,
+    },
+    {
+      field: "amount",
+      headerName: "Importo",
+      valueFormatter: (params) => {
+        return `${params}€`;
+      },
+      width: isMobile ? 50 : 300,
+    },
+    {
+      field: "category",
+      headerName: "Categoria",
+      width: isMobile ? 50 : 300,
+    },
+    { field: "data", headerName: "Data", width: isMobile ? 50 : 300 },
+    {
+      field: "delete",
+      headerName: "Elimina",
+      renderCell: (params) => {
+        return (
+          <button
+            onClick={() => {
+              const id = params.row.id;
+              onDelete(id);
+            }}
+          >
+            <FontAwesomeIcon icon={faTrash} className="mx-2" />
+          </button>
+        );
+      },
+      width: isMobile ? 50 : 300,
+    },
+  ];
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <DataGrid
