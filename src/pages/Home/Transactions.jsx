@@ -16,7 +16,7 @@ const Transactions = () => {
   };
 
   return isMobile ? (
-    <div className="grid-rows-3 grid-cols-1 p-4 z-99 mb-16 w-screen">
+    <div className="grid-rows-3 grid-cols-1 p-4 z-99 mb-16 w-screen pt-10">
       <div className="bg-indigo-900 shadow-lg rounded-lg w-full p-4 row-start-1 h-64 mb-4">
         <AddBudget className="z-99" />
       </div>
