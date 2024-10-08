@@ -7,12 +7,14 @@ import {
   faCog,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { eraseCookie } from "../../hooks/useSetCookie.js";
 
 const NavBarMobile = () => {
   const user = useUserInfo();
   const navigate = useNavigate();
 
   const logout = () => {
+    eraseCookie("AuthToken");
     localStorage.removeItem("auth");
     navigate("/");
   };

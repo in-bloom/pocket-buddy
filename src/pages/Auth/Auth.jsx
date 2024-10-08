@@ -7,7 +7,7 @@ import {
   signInWithCustomToken,
 } from "firebase/auth";
 import { setCookie, getCookie } from "../../hooks/useSetCookie";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export const Auth = () => {
   const navigate = useNavigate();
