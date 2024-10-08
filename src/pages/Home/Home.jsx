@@ -17,7 +17,9 @@ export const Home = () => {
 
   useEffect(() => {
     if (!userInfo || !userInfo.isAuth) {
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     }
   }, [userInfo, navigate]);
 

@@ -12,7 +12,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const logout = () => {
-    eraseCookie("authToken");
+    eraseCookie("AuthToken");
     localStorage.removeItem("auth");
     navigate("/");
   };

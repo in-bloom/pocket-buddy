@@ -65,7 +65,7 @@ const Balance = memo(({ transactions }) => {
           borderColor: "inherit",
           borderRadius: 0,
           borderWidth: 0,
-          formatter: `Bilancio: €${bilancio.toFixed(2)}\nSpseso: {value}%`,
+          formatter: `Budget: €${budget}\nBilancio: €${bilancio.toFixed(2)}\nSpeso: {value}%`,
           offsetCenter: [0, "0%"],
           rich: {
             value: {
