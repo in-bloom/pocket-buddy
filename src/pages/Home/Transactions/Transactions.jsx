@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import useGetTransactions from "../../hooks/useGetTransactions";
-import useDeleteTransactions from "../../hooks/useDeleteTransactions";
+import useGetTransactions from "../../../hooks/useGetTransactions";
+import useDeleteTransactions from "../../../hooks/useDeleteTransactions";
 import DynamicGrid from "./DynamicGrid";
 import AddTransaction from "./AddTransaction";
 import AddBudget from "./AddBudget";
