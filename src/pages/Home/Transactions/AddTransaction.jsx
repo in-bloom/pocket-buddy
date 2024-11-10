@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAddTransactions } from "../../hooks/useAddTransactions";
+import { useAddTransactions } from "../../../hooks/useAddTransactions";
 
 const AddTransaction = () => {
   const { addTransaction } = useAddTransactions();

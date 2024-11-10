@@ -6,9 +6,9 @@ import Sidebar from "./Sidebar";
 import { useMediaQuery } from "react-responsive";
 import NavBarMobile from "./NavBarMobile";
 
-const Dashboard = lazy(() => import("./Dashboard"));
-const Transactions = lazy(() => import("./Transactions"));
-const Settings = lazy(() => import("./Settings"));
+const Dashboard = lazy(() => import("./Dashboard/Dashboard"));
+const Transactions = lazy(() => import("./Transactions/Transactions"));
+const Settings = lazy(() => import("./Settings/Settings"));
 
 export const Home = () => {
   const userInfo = useUserInfo();

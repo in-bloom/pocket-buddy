@@ -1,12 +1,12 @@
 import React from "react";
 import GraficoCategorie from "./GraficoCategorie";
 import GraficoMensile from "./GraficoMensile";
-import useGetMonthlyTransaciton from "../../hooks/useGetMonthlyTransaciton";
+import useGetMonthlyTransaciton from "../../../hooks/useGetMonthlyTransaciton";
 import BarGraph from "./BarGraph";
 import Balance from "./Balance";
 import { useMediaQuery } from "react-responsive";
-import useUserInfo from "../../hooks/useUserInfo";
-import logo from "../../assets/logo in da site.png";
+import useUserInfo from "../../../hooks/useUserInfo";
+import logo from "../../../assets/logo in da site.png";
 
 const Dashboard = () => {
   const { userName } = useUserInfo();

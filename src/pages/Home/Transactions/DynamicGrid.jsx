@@ -14,7 +14,7 @@ const DynamicGrid = ({ data, onDelete }) => {
     },
     {
       field: "amount",
-      headerName: "Importo",
+      headerName: "Quantità",
       valueFormatter: (params) => {
         return `${params}€`;
       },
@@ -22,10 +22,10 @@ const DynamicGrid = ({ data, onDelete }) => {
     },
     {
       field: "category",
-      headerName: "Categoria",
+      headerName: "Categorie",
       width: isMobile ? 50 : 300,
     },
-    { field: "data", headerName: "Data", width: isMobile ? 50 : 300 },
+    { field: "data", headerName: "Date", width: isMobile ? 50 : 300 },
     {
       field: "delete",
       headerName: "Elimina",

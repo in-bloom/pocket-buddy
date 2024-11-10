@@ -1,4 +1,4 @@
-import useGetBudget from "../../hooks/useGetBudget";
+import useGetBudget from "../../../hooks/useGetBudget";
 import EChartsReact from "echarts-for-react";
 import { memo } from "react";
 import { useMediaQuery } from "react-responsive";

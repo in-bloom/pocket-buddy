@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useDefineBudget from "../../hooks/useDefineBudget";
+import useDefineBudget from "../../../hooks/useDefineBudget";
 
 const AddBudget = () => {
   const [budget, setBudget] = useState(0);
@@ -13,11 +13,11 @@ const AddBudget = () => {
   return (
     <form onSubmit={handleSubmit} className="mb-8 p-1">
       <h1 className="text-2xl mb-7 text-white">
-        <b>Aggiungi il tuo budget</b>
+        <b>Imposta il tuo budget</b>
       </h1>
       <div className="mt-4">
         <label className="block text-white text-sm font-bold mb-3">
-          Amount (€):
+          Quantità:
         </label>
         <input
           type="number"
@@ -31,7 +31,7 @@ const AddBudget = () => {
         type="submit"
         className="w-full mt-5 py-2 px-4 bg-indigo-500 text-white rounded-lg hover:bg-slate-700 transition duration-300"
       >
-        <b>Aggiungi Budget</b>
+        <b>Imposta Budget</b>
       </button>
     </form>
   );
