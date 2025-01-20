@@ -10,8 +10,9 @@ const Balance = memo(({ transactions }) => {
     (acc, curr) => acc + Number(curr.amount),
     0
   );
-  const bilancio = budget - spese;
+  const bilancio = (budget - spese).toFixed(2);
 
+  const percentspesa = ((spese / budget) * 100).toFixed(2);
   const option = {
     series: [
       {
@@ -51,7 +52,7 @@ const Balance = memo(({ transactions }) => {
         axisLabel: {
           show: false,
         },
-        data: [{ value: ((spese / budget) * 100).toFixed(2) }],
+        data: [{ value: percentspesa }],
         title: {
           fontSize: isMobile ? 10 : 100,
           fontFamily: "Poppins",
@@ -65,7 +66,7 @@ const Balance = memo(({ transactions }) => {
           borderColor: "inherit",
           borderRadius: 0,
           borderWidth: 0,
-          formatter: `Budget: €${budget}\nBilancio: €${bilancio.toFixed(2)}\nSpeso: {value}%`,
+          formatter: `Budget: €${budget}\nBilancio: €${bilancio}\nSpeso: {value}%`,
           offsetCenter: [0, "0%"],
           rich: {
             value: {
