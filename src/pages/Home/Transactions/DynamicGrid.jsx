@@ -1,16 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import useMediaQuery from "react-responsive";
+import { useMediaQuery } from "react-responsive";
 
 const DynamicGrid = ({ data, onDelete }) => {
-  const isMobile = useMediaQuery({ maxWidth: 768 });
-
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const definitewidth = isMobile ? 100 : 300;
   const col = () => [
     {
       field: "description",
       headerName: "Descrizione",
-      width: isMobile ? 50 : 300,
+      width: definitewidth,
     },
     {
       field: "amount",
@@ -18,14 +18,14 @@ const DynamicGrid = ({ data, onDelete }) => {
       valueFormatter: (params) => {
         return `${params}€`;
       },
-      width: isMobile ? 50 : 300,
+      width: definitewidth,
     },
     {
       field: "category",
       headerName: "Categorie",
-      width: isMobile ? 50 : 300,
+      width: definitewidth,
     },
-    { field: "data", headerName: "Date", width: isMobile ? 50 : 300 },
+    { field: "data", headerName: "Date", width: definitewidth },
     {
       field: "delete",
       headerName: "Elimina",
@@ -50,7 +50,11 @@ const DynamicGrid = ({ data, onDelete }) => {
       <DataGrid
         rows={data}
         columns={col(onDelete)}
-        pageSize={10}
+        initialState={{
+          pagination: {
+            paginationModel: { pageSize: 10, page: 0 },
+          },
+        }}
         slots={{ toolbar: GridToolbar }}
         sx={{
           "& .MuiDataGrid-root": {
